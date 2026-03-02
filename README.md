@@ -40,11 +40,13 @@ Combines mouse side buttons (forward/back) with the scroll wheel to provide more
 
 | Combination | Function |
 |-------------|----------|
-| **Forward Button (XButton2)** | Press alone: Sends `Shift + NumLock` (prevents Chinese/English IME switching) |
+| **Forward Button (XButton2)** | Press: Sends `Shift + NumLock`; Release without wheel: Original forward function |
 | **Forward Button + Scroll Wheel** | Horizontal scrolling (requires application support) |
-| **Back Button (XButton1)** | Press alone: Original forward function |
+| **Back Button (XButton1)** | Press: No action; Release without wheel: Original back function |
 | **Back Button + Wheel Up** | `Shift + F3` |
 | **Back Button + Wheel Down** | `F3` |
+
+**Note**: The original function (forward/back navigation) is triggered when you release the side button without using the scroll wheel.
 
 #### Design Purpose:
 - Maximize use of mouse side buttons, reducing keyboard operations
