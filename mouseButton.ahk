@@ -2,6 +2,7 @@
 ;鼠标侧键：前进+滚轮=横向滚动
 ;鼠标侧键：后退+滚轮=F3 / shift + F3
 ;鼠标侧键：前进键映射到shift + numlock（防止单按shift会导致输入法切换中英文） 
+;Alt 后退键 => F12
 
 ; 全局变量
 g_sideButtonHeld := false
@@ -110,3 +111,6 @@ UpdateKeyPress() {
     global g_wheelUsed := true
 }
 #HotIf
+
+;alt 后退键 => f12
+!XButton1::F12
