@@ -114,3 +114,63 @@ UpdateKeyPress() {
 
 ;alt 后退键 => f12
 !XButton1::F12
+
+
+
+; Shift + Backspace => 屏蔽 Backspace，只保留 Shift
+#HotIf !g_sideButtonHeld  ; 不在鼠标侧键模式下生效
+
+; 当按下 Shift 时检查 Backspace 状态
+LShift::
+{
+    if GetKeyState("Backspace", "P") {
+        ; Backspace 也被按下，屏蔽 Backspace，发送 Shift
+        Send "{LShift}"
+        return
+    }
+    Send "{LShift Down}"
+}
+
+; 释放 Shift 时
+LShift Up::
+{
+    if GetKeyState("Backspace", "P") {
+        ; Backspace 还按着，什么都不做
+        return
+    }
+    Send "{LShift Up}"
+}
+
+#HotIf
+
+; 两次滚轮间隔小于这个时间(ms)就认为是快速滚动
+fastThreshold := 22
+
+; 快速滚动倍数
+fastMultiplier := 5
+
+lastScrollTime := 0
+
+HandleScroll(direction)
+{
+    global lastScrollTime, fastThreshold, fastMultiplier
+
+    now := A_TickCount
+    interval := now - lastScrollTime
+    lastScrollTime := now
+
+    multiplier := (interval < fastThreshold) ? fastMultiplier :  1
+
+    Loop multiplier
+        Send "{" direction "}"
+}
+
+WheelUp::
+{
+    HandleScroll("WheelUp")
+}
+
+WheelDown::
+{
+    HandleScroll("WheelDown")
+}
