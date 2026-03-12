@@ -174,3 +174,8 @@ WheelDown::
 {
     HandleScroll("WheelDown")
 }
+
+; Trae中将鼠标中键映射为Ctrl+Alt+B
+#HotIf WinActive("ahk_exe Trae CN.exe")
+MButton::Send("^!b")
+#HotIf
