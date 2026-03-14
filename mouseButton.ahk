@@ -147,7 +147,7 @@ LShift Up::
 fastThreshold := 22
 
 ; 快速滚动倍数
-fastMultiplier := 5
+fastMultiplier := 6
 
 lastScrollTime := 0
 
