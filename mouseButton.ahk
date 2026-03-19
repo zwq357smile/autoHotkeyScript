@@ -143,6 +143,7 @@ LShift Up::
 
 #HotIf
 
+
 ; 两次滚轮间隔小于这个时间(ms)就认为是快速滚动
 fastThreshold := 22
 
@@ -151,18 +152,43 @@ fastMultiplier := 6
 
 lastScrollTime := 0
 
+timer := 0
+
+isFaster := false
+
 HandleScroll(direction)
 {
-    global lastScrollTime, fastThreshold, fastMultiplier
+    global lastScrollTime, fastThreshold, fastMultiplier, timer, isFaster
 
     now := A_TickCount
     interval := now - lastScrollTime
     lastScrollTime := now
 
-    multiplier := (interval < fastThreshold) ? fastMultiplier :  1
+    if (interval < fastThreshold)
+        isFaster := true
+    clearTimeout(timer)
+    timer := setTimeout(ResetIsFaster, 50)
+
+    multiplier := isFaster ? fastMultiplier :  1
 
     Loop multiplier
         Send "{" direction "}"
+}
+
+resetIsFaster() {
+    global isFaster
+    isFaster := false
+}
+
+setTimeout(callback, ms) {
+    f := callback
+    SetTimer(f, -ms)
+    return f
+}
+clearTimeout(id) {
+    if IsInteger(id)
+        return
+    SetTimer(id, 0)
 }
 
 WheelUp::
