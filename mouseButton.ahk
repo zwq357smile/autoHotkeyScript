@@ -167,7 +167,7 @@ HandleScroll(direction)
     if (interval < fastThreshold)
         isFaster := true
     clearTimeout(timer)
-    timer := setTimeout(ResetIsFaster, 50)
+    timer := setTimeout(ResetIsFaster, 40)
 
     multiplier := isFaster ? fastMultiplier :  1
 
